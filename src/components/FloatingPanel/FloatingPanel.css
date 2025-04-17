@@ -1,0 +1,28 @@
+.floating-panel {
+    background-color: rgba(15, 1, 31, 0.6);
+    backdrop-filter: blur(6px);
+    border-radius: 0.375rem;
+    padding: 1rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    z-index: 10;
+  }
+  
+  /* Shadow Glow Effects */
+  .shadow-glow-pink { 
+    box-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink) inset; 
+    border: 1px solid var(--neon-pink); 
+  }
+  
+  .shadow-glow-blue { 
+    box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue) inset; 
+    border: 1px solid var(--neon-blue); 
+  }
+  
+  .hover\:shadow-glow-blue-pulse:hover { 
+    animation: pulse-glow-blue 1.5s infinite ease-in-out; 
+  }
+  
+  .hover\:shadow-glow-pink-pulse:hover { 
+    animation: pulse-glow-pink 1.5s infinite ease-in-out; 
+  }
