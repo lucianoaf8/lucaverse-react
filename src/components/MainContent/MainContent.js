@@ -1,6 +1,7 @@
 import React from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import FloatingPanel from '../FloatingPanel/FloatingPanel';
+import GlitchAvatar from './GlitchAvatar';
 import './MainContent.css';
 
 const MainContent = () => {
@@ -28,7 +29,7 @@ const MainContent = () => {
           {/* Right Column - Avatar and Floating Panels */}
           <div className="relative flex justify-center md:justify-end items-center mt-8 md:mt-0 h-[250px] md:h-[320px]">
             <div className="avatar-container init-hidden fade-in-right delay-2">
-              <img src="avatar-luca.png" alt="Luca Avatar" className="max-h-[65%] md:max-h-[70%] w-auto object-contain" />
+              <GlitchAvatar />
             </div>
 
             <FloatingPanel 

@@ -15,12 +15,6 @@ const Header = () => {
               />
             </a>
           </div>
-          <div className="nav-links">
-            <a href="#" className="glitch-effect" data-text="HOME">HOME</a>
-            <a href="#" className="glitch-effect" data-text="ABOUT">ABOUT</a>
-            <a href="#" className="glitch-effect" data-text="MINDSPACE">MINDSPACE</a>
-            <a href="#" className="glitch-effect" data-text="LOGIN">LOGIN</a>
-          </div>
         </nav>
         <div className="nav-glow"></div>
       </div>
