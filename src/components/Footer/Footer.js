@@ -12,7 +12,7 @@ const Footer = () => {
             &copy; {currentYear} <a href="https://luca137.com" className="text-[color:var(--neon-blue)]">Luca137</a> | Built with curiosity, hosted in the void
           </div>
           <div className="footer-links">
-            <a href="#">GitHub</a> | <a href="#">Email</a>
+            <a href="https://github.com/lucianoaf8">GitHub</a> | <a href="mailto:luki@lucaverse.dev">Email</a>
           </div>
         </div>
       </div>

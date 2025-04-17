@@ -39,7 +39,7 @@ const MainContent = () => {
               style={{ top: '5%', right: '5%' }}
               animationDelay="delay-3"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Lucaverse.dev is my everything-site — part portfolio, part digital brain, part experimental playground. It’s where I host and share what I build, what I learn, and the tools I rely on.
             </FloatingPanel>
 
             <FloatingPanel 
@@ -49,7 +49,7 @@ const MainContent = () => {
               style={{ top: '40%', left: '0%' }}
               animationDelay="delay-4"
             >
-              Vestibulum ante ipsum primis in faucibus orci luctus.
+              I want Lucaverse to grow into a living system — a modular, ever-expanding galaxy of thoughts, scripts, resources, and side quests. It’s not about polish; it’s about presence.
             </FloatingPanel>
 
             <FloatingPanel 
