@@ -8,9 +8,10 @@ const MainContent = () => {
   return (
     <main className="main-content">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 min-h-[85vh] flex items-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center w-full">
-          {/* Left Column - Text Content */}
-          <div className="text-center md:text-left relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
+
+          {/* Left Column - Text */}
+          <div className="flex flex-col justify-center text-center md:text-left relative z-10">
             <h1 className="font-orbitron text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-wider leading-tight init-hidden fade-in-left delay-1">
               <span className="block text-[color:var(--neon-pink)] text-glow-pink">Welcome</span>
               <span className="block text-[color:var(--neon-pink)] text-glow-pink text-xl sm:text-2xl lg:text-3xl mb-2">to the</span>
@@ -26,41 +27,47 @@ const MainContent = () => {
             </div>
           </div>
 
-          {/* Right Column - Avatar and Floating Panels */}
-          <div className="relative flex justify-center md:justify-end items-center mt-8 md:mt-0 h-[250px] md:h-[320px]">
-            <div className="avatar-container init-hidden fade-in-right delay-2">
+          {/* Right Column - Avatar + Panels */}
+          <div className="relative flex items-center justify-center min-h-[500px]">
+
+            {/* Avatar centered inside */}
+            <div className="avatar-container"  style={{ marginTop: '30px' }}>
               <GlitchAvatar />
             </div>
 
+            {/* Floating Panels */}
             <FloatingPanel 
               title="Mission" 
               glowColor="blue"
-              className="w-44"
-              style={{ top: '5%', right: '5%' }}
+              className="w-64  floating-float-medium"
+              style={{ top: '0%', right: '-20%' }}
               animationDelay="delay-3"
             >
-              Lucaverse.dev is my everything-site — part portfolio, part digital brain, part experimental playground. It’s where I host and share what I build, what I learn, and the tools I rely on.
+              A gateway to my builds, my thoughts, my tools.
+              Lucaverse.dev is where experiments become reality.
             </FloatingPanel>
 
             <FloatingPanel 
               title="Vision" 
               glowColor="blue"
-              className="w-44"
-              style={{ top: '40%', left: '0%' }}
+              className="w-64  floating-float-slow"
+              style={{ top: '55%', left: '-20%' }}
               animationDelay="delay-4"
             >
-              I want Lucaverse to grow into a living system — a modular, ever-expanding galaxy of thoughts, scripts, resources, and side quests. It’s not about polish; it’s about presence.
+              A growing galaxy of scripts, side quests, and whispers.
+              It's not about polish; it's about presence.
             </FloatingPanel>
 
             <FloatingPanel 
               title="Luca" 
               glowColor="pink"
-              className="w-44"
-              style={{ bottom: '15%', right: '10%' }}
+              className="w-64  floating-float-fast"
+              style={{ bottom: '-15%', right: '-15%' }}
               animationDelay="delay-5"
             >
               The Architect
             </FloatingPanel>
+
           </div>
         </div>
       </section>

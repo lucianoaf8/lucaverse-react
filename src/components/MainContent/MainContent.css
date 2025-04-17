@@ -1,19 +1,51 @@
 .main-content {
-    position: relative;
-    z-index: 5;
-    padding-bottom: 60px; /* Prevents footer overlap */
-  }
-  
-  /* Avatar Container Styles */
+  position: relative;
+  z-index: 5;
+  padding-bottom: 60px; /* Prevents footer overlap */
+}
+
+/* Avatar Container Styles */
+.avatar-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  margin-top: 0;
+  margin-bottom: 0;
+  filter: drop-shadow(0 0 15px rgba(0, 202, 255, 0.4));
+}
+
+/* Canvas inside avatar */
+.avatar-container canvas {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Glitch active animation */
+.glitch-active {
+  color: var(--neon-blue);
+  text-shadow: 0 0 var(--glow-blur) var(--neon-blue), 0 0 var(--glow-blur-strong) var(--neon-blue);
+  animation: glitch 500ms infinite linear alternate-reverse;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
   .avatar-container {
+    max-width: 280px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .floating-panel {
     position: relative;
-    z-index: 1;
-    filter: drop-shadow(0 0 15px rgba(0, 202, 255, 0.4));
+    margin: 20px auto;
+    top: auto;
+    left: auto;
+    right: auto;
   }
-  
-  /* Glitch active animation */
-  .glitch-active {
-    color: var(--neon-blue);
-    text-shadow: 0 0 var(--glow-blur) var(--neon-blue), 0 0 var(--glow-blur-strong) var(--neon-blue);
-    animation: glitch 500ms infinite linear alternate-reverse;
-  }
+}

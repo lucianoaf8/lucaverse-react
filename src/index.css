@@ -29,6 +29,9 @@ body {
 .font-orbitron { font-family: 'Orbitron', sans-serif; }
 .font-inter { font-family: 'Inter', sans-serif; }
 .font-poppins { font-family: 'Poppins', sans-serif; }
+.font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+.font-anonymous { font-family: 'Anonymous Pro', monospace; }
+
 
 /* Global text glow effects */
 .text-glow-pink { text-shadow: 0 0 var(--glow-blur) var(--neon-pink), 0 0 var(--glow-blur-strong) var(--neon-pink); }
