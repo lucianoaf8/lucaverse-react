@@ -1,0 +1,272 @@
+/* src/components/ShutdownEffect/ShutdownEffect.css */
+.shutdown-effect-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  /* Overlay for the shutdown effect */
+  .shutdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+  
+  /* TV Scan line effect */
+  .scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  }
+  
+  /* CRT screen shutdown animation */
+  .crt-shutdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    transform: scaleY(0);
+    transform-origin: center center;
+  }
+  
+  /* Glitch overlay for the whole screen */
+  .glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+    background: rgba(255, 0, 200, 0.15);
+    opacity: 0;
+  }
+  
+  /* Flicker effect */
+  .flicker-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0;
+    z-index: 9997;
+    pointer-events: none;
+  }
+  
+  /* More intense glitching class */
+  .glitching-intense {
+    animation: intense-glitch 0.2s ease infinite;
+  }
+  
+  .glitching-intense > div:not(.shutdown-effect-container):not(.shutdown-overlay):not(.scanlines):not(.crt-shutdown) {
+    animation: intense-displacement 0.2s ease infinite;
+  }
+  
+  @keyframes intense-glitch {
+    0% {
+      transform: translate(0);
+      filter: hue-rotate(0deg);
+    }
+    10% {
+      transform: translate(-3px, 3px);
+      filter: hue-rotate(30deg);
+    }
+    20% {
+      transform: translate(-5px, 5px);
+      filter: hue-rotate(0deg) blur(1px);
+    }
+    30% {
+      transform: translate(-4px, -4px);
+      filter: hue-rotate(-30deg);
+    }
+    40% {
+      transform: translate(3px, 4px);
+      filter: hue-rotate(0deg) contrast(150%);
+    }
+    50% {
+      transform: translate(5px, -5px);
+      filter: hue-rotate(45deg);
+    }
+    60% {
+      transform: translate(-2px, 1px);
+      filter: hue-rotate(0deg) brightness(150%);
+    }
+    70% {
+      transform: translate(4px, 2px);
+      filter: saturate(200%) hue-rotate(-45deg);
+    }
+    80% {
+      transform: translate(-3px, -3px);
+      filter: contrast(120%) brightness(90%);
+    }
+    90% {
+      transform: translate(2px, -1px);
+      filter: hue-rotate(30deg) blur(1.5px);
+    }
+    100% {
+      transform: translate(0);
+      filter: hue-rotate(0deg);
+    }
+  }
+  
+  @keyframes intense-displacement {
+    0% {
+      transform: translate(0);
+      opacity: 1;
+    }
+    10% {
+      transform: translate(-5px, 3px);
+      opacity: 0.9;
+    }
+    20% {
+      transform: translate(7px, -5px);
+      opacity: 1;
+    }
+    30% {
+      transform: translate(-4px, -6px) skewX(5deg);
+      opacity: 0.85;
+    }
+    40% {
+      transform: translate(6px, 4px);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(-7px, -3px) skewY(-5deg);
+      opacity: 0.9;
+    }
+    60% {
+      transform: translate(5px, 5px);
+      opacity: 1;
+    }
+    70% {
+      transform: translate(-3px, 6px) scale(1.02);
+      opacity: 0.95;
+    }
+    80% {
+      transform: translate(4px, -4px);
+      opacity: 1;
+    }
+    90% {
+      transform: translate(-6px, 2px);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translate(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Data corruption visual effect */
+  @keyframes data-corruption {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
+  
+  /* Screen banding effect */
+  .screen-band {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: rgba(255, 0, 0, 0.3);
+    z-index: 10001;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+    animation: band-scroll 3s linear infinite;
+  }
+  
+  @keyframes band-scroll {
+    0% {
+      top: -10px;
+    }
+    100% {
+      top: 100%;
+    }
+  }
+  
+  /* Keep the original glitch classes for compatibility */
+  .glitching {
+    animation: glitch-anim 0.2s ease;
+  }
+  
+  .glitching > div:not(.shutdown-effect-container):not(.shutdown-overlay):not(.scanlines):not(.crt-shutdown) {
+    animation: glitch-displacement 0.3s ease;
+  }
+  
+  @keyframes glitch-anim {
+    0% {
+      transform: translate(0);
+      filter: hue-rotate(0deg);
+    }
+    10% {
+      transform: translate(-1px, 1px);
+      filter: hue-rotate(20deg);
+    }
+    20% {
+      transform: translate(-2px, 2px);
+      filter: hue-rotate(0deg);
+    }
+    30% {
+      transform: translate(-2px, -2px);
+      filter: hue-rotate(-20deg);
+    }
+    40% {
+      transform: translate(1px, 2px);
+      filter: hue-rotate(0deg);
+    }
+    50% {
+      transform: translate(2px, -2px);
+      filter: hue-rotate(20deg);
+    }
+    60% {
+      transform: translate(0);
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      transform: translate(0);
+      filter: hue-rotate(0deg);
+    }
+  }
+  
+  @keyframes glitch-displacement {
+    0% {
+      transform: translate(0);
+    }
+    25% {
+      transform: translate(-3px, 2px);
+    }
+    50% {
+      transform: translate(3px, -3px);
+    }
+    75% {
+      transform: translate(-2px, -1px);
+    }
+    100% {
+      transform: translate(0);
+    }
+  }
