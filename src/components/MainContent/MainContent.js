@@ -2,6 +2,7 @@ import React from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import FloatingPanel from '../FloatingPanel/FloatingPanel';
 import GlitchAvatar from './GlitchAvatar';
+import SocialIcon from '../SocialIcon/SocialIcon'; 
 import './MainContent.css';
 
 const MainContent = () => {
@@ -29,9 +30,33 @@ const MainContent = () => {
 
           {/* Right Column - Avatar + Panels */}
           <div className="relative flex items-center justify-center min-h-[500px]">
+          
+            <SocialIcon 
+              type="github" 
+              href="https://github.com/lucianoaf8" 
+              style={{ top: '40%', right: '-5%' }}
+            />
+
+            <SocialIcon 
+              type="linkedin" 
+              href="https://www.linkedin.com/in/lucianoaf8" 
+              style={{ bottom: '0%', left: '15%' }}
+            />
+
+            <SocialIcon 
+              type="email" 
+              href="mailto:your@email.com" 
+              style={{ bottom: '10%', right: '10%' }}
+            />
+
+            <SocialIcon 
+              type="huggingface" 
+              href="https://huggingface.co/Luca137" 
+              style={{ top: '20%', left: '20%' }}
+            />
 
             {/* Avatar centered inside */}
-            <div className="avatar-container"  style={{ marginTop: '30px' }}>
+            <div className="avatar-container"  style={{ marginTop: '30px', filter: 'brightness(0.9)' }}>
               <GlitchAvatar />
             </div>
 

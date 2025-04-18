@@ -1,0 +1,28 @@
+/* src/components/SocialIcon/SocialIcon.css */
+.social-icon {
+    position: absolute;
+    font-size: 30px;
+    color: var(--neon-blue);
+    background: rgba(15, 1, 31, 0.5);
+    backdrop-filter: blur(6px);
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 8px var(--neon-blue);
+    z-index: 30; /* 🚀 Now higher than FloatingPanels (z-index: 10) */
+  }
+  
+  
+  .social-icon:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 14px var(--neon-pink);
+    color: var(--neon-pink);
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .social-icon {
+      display: none;
+    }
+  }
+
