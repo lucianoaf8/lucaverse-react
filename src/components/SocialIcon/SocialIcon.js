@@ -1,13 +1,14 @@
 // src/components/SocialIcon/SocialIcon.js
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaRobot } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { SiHuggingface } from 'react-icons/si';            // ← add this
 import './SocialIcon.css';
 
 const iconMap = {
-  github: <FaGithub size={30} />,      // 🐙 GitHub icon
-  linkedin: <FaLinkedin size={30} />,   // 🔗 LinkedIn icon
-  email: <FaEnvelope size={30} />,      // ✉️ Email icon
-  huggingface: <FaRobot size={30} />,   // 🤖 Hugging Face (using robot)
+  github:    <FaGithub size={30} />,
+  linkedin:  <FaLinkedin size={30} />,
+  email:     <FaEnvelope size={30} />,
+  huggingface: <SiHuggingface size={30} />,               // ← replace FaRobot with this
 };
 
 const SocialIcon = ({ type, href, style = {} }) => {

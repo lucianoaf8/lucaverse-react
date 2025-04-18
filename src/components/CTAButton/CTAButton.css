@@ -1,57 +1,109 @@
 .cta-button {
-    display: inline-block;
-    font-family: 'Orbitron', sans-serif;
-    background-color: rgba(255, 0, 200, 0.1);
-    color: var(--neon-pink);
-    border: 2px solid var(--neon-pink);
-    padding: 16px 32px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 2px;
-    margin-top: 16px;
-    transition: all 0.3s ease;
-    position: relative;
-    box-shadow: 0 0 15px rgba(255, 0, 200, 0.3), inset 0 0 10px rgba(255, 0, 200, 0.2);
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 0, 200, 0.3), transparent);
-    transition: 0.5s;
-  }
-  
-  .cta-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 0, 200, 0.5), inset 0 0 15px rgba(255, 0, 200, 0.3);
-  }
-  
-  .cta-button:hover::before {
-    left: 100%;
-  }
-  
-  .cta-button:active {
-    transform: scale(0.98);
-    box-shadow: 0 0 15px rgba(255, 0, 200, 0.4), inset 0 0 8px rgba(255, 0, 200, 0.2);
-  }
-  
-  .cta-sublabel {
-    display: block;
-    font-size: 0.7rem;
-    font-style: italic;
-    letter-spacing: 1px;
-    margin-top: 8px;
-    opacity: 0.7;
-    text-transform: none;
-    font-weight: 400;
-    font-family: 'Poppins', sans-serif;
-  }
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--neon-pink);
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 16px;
+}
+
+/* Primary (default) variant */
+.cta-primary {
+  background-color: rgba(255, 0, 200, 0.1);
+  border: 2px solid var(--neon-pink);
+  color: var(--neon-pink);
+  box-shadow: 0 0 15px rgba(255, 0, 200, 0.3), inset 0 0 10px rgba(255, 0, 200, 0.2);
+}
+
+/* Secondary variant - dimmer and blue, matching reference design */
+.cta-secondary {
+  background-color: rgba(0, 202, 255, 0.05);
+  border: 1px solid var(--neon-blue);
+  color: var(--neon-blue);
+  box-shadow: 0 0 5px rgba(0, 202, 255, 0.2), inset 0 0 3px rgba(0, 202, 255, 0.1);
+  opacity: 0.85;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+/* Size variations */
+.cta-default {
+  padding: 16px 32px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-width: 280px;
+}
+
+.cta-small {
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 280px;
+}
+
+.cta-large {
+  padding: 20px 40px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 200, 0.3), transparent);
+  transition: 0.5s;
+}
+
+.cta-secondary::before {
+  background: linear-gradient(90deg, transparent, rgba(0, 202, 255, 0.2), transparent);
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+.cta-primary:hover {
+  box-shadow: 0 0 25px rgba(255, 0, 200, 0.5), inset 0 0 15px rgba(255, 0, 200, 0.3);
+}
+
+.cta-secondary:hover {
+  box-shadow: 0 0 15px rgba(0, 202, 255, 0.4), inset 0 0 10px rgba(0, 202, 255, 0.2);
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+}
+
+.cta-primary:active {
+  box-shadow: 0 0 15px rgba(255, 0, 200, 0.4), inset 0 0 8px rgba(255, 0, 200, 0.2);
+}
+
+.cta-secondary:active {
+  box-shadow: 0 0 10px rgba(0, 202, 255, 0.3), inset 0 0 5px rgba(0, 202, 255, 0.1);
+}
+
+.cta-sublabel {
+  display: block;
+  font-size: 0.7rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  margin-top: 8px;
+  opacity: 0.7;
+  text-transform: none;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
