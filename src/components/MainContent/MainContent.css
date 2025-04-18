@@ -33,6 +33,12 @@
   animation: glitch 500ms infinite linear alternate-reverse;
 }
 
+/* Spacing for text elements */
+.font-orbitron span {
+  display: block;
+  margin-bottom: 0.5rem; /* Add default spacing between all text elements */
+}
+
 /* Mobile responsive fixes */
 @media (max-width: 768px) {
   .avatar-container {

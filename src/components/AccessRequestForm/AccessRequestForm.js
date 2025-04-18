@@ -9,8 +9,7 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
     reason: ''
   });
   const formRef = useRef(null);
-  
-  // Handle clicks outside the form to close it
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
@@ -26,24 +25,42 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, onClose]);
-  
-  // Handle form input changes
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  // Handle form submission
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you would typically send the data to a server
-    alert('Access request submitted. We will contact you soon!');
+    
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('email', formData.email);
+    data.append('message', formData.reason); // Reason maps to "message" in Worker
+    data.append('website', ''); // Honeypot field (should stay empty)
+
+    try {
+      const response = await fetch('https://formerformfarmer.lucianoaf8.workers.dev/', {
+        method: 'POST',
+        body: data,
+      });
+
+      if (response.redirected) {
+        window.location.href = response.url; // Redirect on success
+      } else {
+        alert('Something went wrong submitting your request.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('An error occurred. Please try again later.');
+    }
+
     onClose();
   };
-  
+
   if (!isOpen) return null;
-  
+
   return (
     <div className="access-form-overlay">
       <div className="access-form-container" ref={formRef}>
@@ -53,7 +70,7 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
           </h2>
           <button className="close-button" onClick={onClose}>×</button>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="access-request-form">
           <div className="form-group">
             <label htmlFor="name">Your Name</label>
@@ -67,7 +84,7 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
               placeholder="Enter your name"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input
@@ -80,7 +97,7 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
               placeholder="you@example.com"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="reason">Why do you want access?</label>
             <textarea
@@ -93,7 +110,10 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
               placeholder="Briefly explain why you'd like to enter the Lucaverse..."
             />
           </div>
-          
+
+          {/* Hidden honeypot */}
+          <input type="text" name="website" style={{ display: 'none' }} tabIndex="-1" autoComplete="off" />
+
           <button type="submit" className="submit-button">
             Submit Request
           </button>
