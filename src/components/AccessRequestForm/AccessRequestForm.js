@@ -16,11 +16,11 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
         onClose();
       }
     };
-    
+
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -33,12 +33,12 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const data = new FormData();
     data.append('name', formData.name);
     data.append('email', formData.email);
     data.append('message', formData.reason); // Reason maps to "message" in Worker
-    data.append('website', ''); // Honeypot field (should stay empty)
+    data.append('website', ''); // Honeypot field
 
     try {
       const response = await fetch('https://formerformfarmer.lucianoaf8.workers.dev/', {
@@ -46,8 +46,10 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
         body: data,
       });
 
-      if (response.redirected) {
-        window.location.href = response.url; // Redirect on success
+      if (response.ok) {
+        const result = await response.json();
+        alert(result.message || 'Your request was submitted successfully!');
+        onClose(); // Only close after success
       } else {
         alert('Something went wrong submitting your request.');
       }
@@ -55,8 +57,6 @@ const AccessRequestForm = ({ isOpen, onClose }) => {
       console.error('Form submission error:', error);
       alert('An error occurred. Please try again later.');
     }
-
-    onClose();
   };
 
   if (!isOpen) return null;
