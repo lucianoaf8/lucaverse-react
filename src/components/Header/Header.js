@@ -5,8 +5,8 @@ const Header = () => {
   return (
     <header className="site-header init-hidden fade-in-down">
       <div className="navbar-container">
-        <nav className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="nav-logo">
+        <nav className="w-full px-8 flex justify-between items-center">
+          <div className="nav-logo ml-4">
             <a href="#" className="logo-link">
               <img 
                 src="/assets/logos/lucaverse-logo1-nobg.svg" 
@@ -31,10 +31,10 @@ const Header = () => {
               <div className="nav-cta-menu">
                 <ul className="nav-cta-menu-list">
                   <li className="nav-cta-menu-item">
-                    <a href="#" className="nav-cta-button cta-primary nav-cta-small">Lucaverse Login</a>
+                    <button type="button" onClick={() => window.dispatchEvent(new Event('enterLucaverse'))} className="nav-cta-button cta-primary nav-cta-small">Lucaverse Login</button>
                   </li>
                   <li className="nav-cta-menu-item">
-                    <a href="#" className="nav-cta-button cta-secondary nav-cta-small">Request Access</a>
+                    <button type="button" onClick={() => window.dispatchEvent(new Event('requestAccess'))} className="nav-cta-button cta-secondary nav-cta-small">Request Access</button>
                   </li>
                 </ul>
               </div>

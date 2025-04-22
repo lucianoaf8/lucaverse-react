@@ -1,5 +1,5 @@
 // Updated src/components/MainContent/MainContent.js with shutdown effect
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import FloatingPanel from '../FloatingPanel/FloatingPanel';
 import GlitchAvatar from './GlitchAvatar';
@@ -276,6 +276,18 @@ const MainContent = () => {
     scanlines.style.zIndex = '1';
     alertContainer.appendChild(scanlines);
   };
+
+  // Listen for nav button global events
+  useEffect(() => {
+    const onEnter = () => handleEnterLucaverse();
+    const onRequest = () => openForm();
+    window.addEventListener('enterLucaverse', onEnter);
+    window.addEventListener('requestAccess', onRequest);
+    return () => {
+      window.removeEventListener('enterLucaverse', onEnter);
+      window.removeEventListener('requestAccess', onRequest);
+    };
+  }, []);
 
   return (
     <main className="main-content">
