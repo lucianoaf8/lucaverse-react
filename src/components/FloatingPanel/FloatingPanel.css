@@ -3,16 +3,108 @@
   backdrop-filter: blur(6px);
   border-radius: 0.5rem;
   padding: 1.25rem 1rem; /* More padding for breathing room */
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: box-shadow 0.66s cubic-bezier(0.4,0.0,0.2,1),
+              transform 0.88s cubic-bezier(0.4,0.0,0.2,1),
+              min-width 0.64s cubic-bezier(0.4,0.0,0.2,1),
+              max-width 0.64s cubic-bezier(0.4,0.0,0.2,1),
+              padding 0.64s cubic-bezier(0.4,0.0,0.2,1);
   position: absolute; /* ✅ KEEP ABSOLUTE */
   z-index: 10;
   min-width: 180px; /* ✅ Expand the minimum width */
   max-width: 260px; /* ✅ Allow it to grow but not too much */
   word-break: break-word; /* ✅ Break words nicely if too long */
   text-align: center; /* Optional, looks cleaner */
+  /* Tilt effect by default, to be fixed on hover */
+  position: relative;
+  overflow: hidden;
 }
 
-  
+.floating-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 0, 200, 0.3), transparent);
+  transition: left 0.5s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --- Panel tilt toward avatar with floating animation --- */
+@keyframes gentle-float-left {
+  0%   { transform: perspective(900px) rotateY(18deg) translateY(0px) translateX(0px);}
+  25%  { transform: perspective(900px) rotateY(18deg) translateY(-5px) translateX(3px);}
+  50%  { transform: perspective(900px) rotateY(18deg) translateY(0px) translateX(0px);}
+  75%  { transform: perspective(900px) rotateY(18deg) translateY(5px) translateX(-3px);}
+  100% { transform: perspective(900px) rotateY(18deg) translateY(0px) translateX(0px);}
+}
+@keyframes gentle-float-right {
+  0%   { transform: perspective(900px) rotateY(-18deg) translateY(0px) translateX(0px);}
+  25%  { transform: perspective(900px) rotateY(-18deg) translateY(-5px) translateX(3px);}
+  50%  { transform: perspective(900px) rotateY(-18deg) translateY(0px) translateX(0px);}
+  75%  { transform: perspective(900px) rotateY(-18deg) translateY(5px) translateX(-3px);}
+  100% { transform: perspective(900px) rotateY(-18deg) translateY(0px) translateX(0px);}
+}
+@keyframes gentle-float-center {
+  0%   { transform: perspective(900px) rotateY(0deg) translateY(0px) translateX(0px);}
+  25%  { transform: perspective(900px) rotateY(0deg) translateY(-5px) translateX(3px);}
+  50%  { transform: perspective(900px) rotateY(0deg) translateY(0px) translateX(0px);}
+  75%  { transform: perspective(900px) rotateY(0deg) translateY(5px) translateX(-3px);}
+  100% { transform: perspective(900px) rotateY(0deg) translateY(0px) translateX(0px);}
+}
+
+.floating-panel.tilt-left {
+  animation: gentle-float-left 10s ease-in-out infinite;
+}
+.floating-panel.tilt-right {
+  animation: gentle-float-right 10s ease-in-out infinite;
+}
+.floating-panel.tilt-center {
+  animation: gentle-float-center 10s ease-in-out infinite;
+}
+
+/* On hover, fix tilt and expand like a card */
+.floating-panel.tilt-left:hover::before,
+.floating-panel.tilt-right:hover::before,
+.floating-panel.tilt-center:hover::before {
+  left: 100%;
+}
+
+.floating-panel.tilt-left:hover,
+.floating-panel.tilt-right:hover,
+.floating-panel.tilt-center:hover {
+  transform: perspective(900px) rotateY(0deg) scale(1.09, 1.14) !important;
+  animation: none !important;
+  /* Use a shadow color matching the panel's theme color */
+  box-shadow: 0 0 25px rgba(0, 202, 255, 0.4), inset 0 0 15px rgba(0, 202, 255, 0.2);
+  z-index: 20;
+  min-width: 210px;
+  max-width: 320px;
+  padding: 2.2rem 1.3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-panel.tilt-left:hover::before,
+.floating-panel.tilt-right:hover::before,
+.floating-panel.tilt-center:hover::before {
+  content: none;
+}
+
+/* For panels that should use the pink theme, add a .panel-pink class */
+.floating-panel.panel-pink:hover {
+  box-shadow: 0 0 25px rgba(255, 0, 200, 0.5), inset 0 0 15px rgba(255, 0, 200, 0.3);
+}
+
+/* Remove old tilt transforms to prevent conflict */
+.floating-panel.tilt-left,
+.floating-panel.tilt-right,
+.floating-panel.tilt-center {
+  /* No static transform here, handled in animation */
+}
+
   /* Shadow Glow Effects */
   .shadow-glow-pink { 
     box-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink) inset; 
@@ -62,4 +154,3 @@
   .floating-float-fast {
     animation: gentle-float 8s ease-in-out infinite;
   }
-  

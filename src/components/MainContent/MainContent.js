@@ -445,7 +445,7 @@ const MainContent = () => {
               <FloatingPanel 
                 title="Mission" 
                 glowColor="blue"
-                className="w-64 floating-float-medium"
+                className="w-64 floating-float-medium tilt-right"
                 style={{ top: '0%', right: '-20%' }}
                 animationDelay="delay-3"
               >
@@ -455,7 +455,7 @@ const MainContent = () => {
               <FloatingPanel 
                 title="Vision" 
                 glowColor="blue"
-                className="w-64 floating-float-slow"
+                className="w-64 floating-float-slow tilt-left"
                 style={{ top: '55%', left: '-20%' }}
                 animationDelay="delay-4"
               >
@@ -465,7 +465,7 @@ const MainContent = () => {
               <FloatingPanel 
                 title="Luca" 
                 glowColor="pink"
-                className="w-64 floating-float-fast"
+                className="w-64 floating-float-fast tilt-center"
                 style={{ bottom: '-15%', right: '-15%' }}
                 animationDelay="delay-5"
               >
