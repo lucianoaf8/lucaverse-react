@@ -7,7 +7,7 @@ const Header = () => {
       <div className="navbar-container">
         <nav className="w-full px-8 flex justify-between items-center">
           <div className="nav-logo ml-4">
-            <a href="#" className="logo-link">
+            <a href="/" className="logo-link">
               <img 
                 src="/assets/logos/lucaverse-logo1-nobg.svg" 
                 alt="Lucaverse Logo" 
@@ -19,13 +19,13 @@ const Header = () => {
           <div className="nav-right">
             <div className="nav-menu">
                 <ul className="nav-menu-list">
-                  <li className="nav-menu-item"><a href="#" className="nav-menu-link">Home</a></li>
-                  <li className="nav-menu-item"><a href="#" className="nav-menu-link">About</a></li>
-                  <li className="nav-menu-item"><a href="#" className="nav-menu-link">Projects</a></li>
-                  <li className="nav-menu-item"><a href="#" className="nav-menu-link">Custom GPTs</a></li>
-                  <li className="nav-menu-item"><a href="#" className="nav-menu-link">Contact Me</a></li>
-                  <li className="nav-menu-item"><a href="#" className="nav-menu-link">Blog</a></li>
-                  <li className="nav-menu-item"><a href="#" className="nav-menu-link">Newsletter</a></li>
+                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Home</button></li>
+                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">About</button></li>
+                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Projects</button></li>
+                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Custom GPTs</button></li>
+                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Contact Me</button></li>
+                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Blog</button></li>
+                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Newsletter</button></li>
                 </ul>
               </div>
               <div className="nav-cta-menu">

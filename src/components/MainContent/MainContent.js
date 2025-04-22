@@ -150,7 +150,6 @@ const MainContent = () => {
               const messageText = messageEl.textContent;
               if (messageText && messageText.length > 0) {
                 const randomIndex = Math.floor(Math.random() * messageText.length);
-                const char = messageText.charAt(randomIndex);
                 const randomChar = String.fromCharCode(Math.floor(Math.random() * 20) + 9600);
                 messageEl.textContent = messageText.substring(0, randomIndex) + 
                                         randomChar + 
@@ -332,30 +331,36 @@ const MainContent = () => {
           
           {/* Right Column - Avatar + Panels */}
           <div className="relative flex items-center justify-center min-h-[500px]">
-          
+            <div className="social-icon-container">
             <SocialIcon 
               type="github" 
               href="https://github.com/lucianoaf8" 
-              style={{ top: '40%', right: '-5%' }}
+              orbitRadius={200} // Increase this value
+              angle={0}
             />
 
             <SocialIcon 
               type="linkedin" 
               href="https://www.linkedin.com/in/lucianoaf8" 
-              style={{ bottom: '0%', left: '15%' }}
+              orbitRadius={200} // Increase this value
+              angle={90}
             />
 
             <SocialIcon 
               type="email" 
               href="mailto:your@email.com" 
-              style={{ bottom: '10%', right: '10%' }}
+              orbitRadius={200} // Increase this value
+              angle={180}
             />
 
             <SocialIcon 
               type="huggingface" 
               href="https://huggingface.co/Luca137" 
-              style={{ top: '20%', left: '20%' }}
+              orbitRadius={200} // Increase this value
+              angle={270}
             />
+            </div>
+
 
             {/* Avatar centered inside */}
             <div className="avatar-container" style={{ marginTop: '30px', filter: 'brightness(0.9)' }}>

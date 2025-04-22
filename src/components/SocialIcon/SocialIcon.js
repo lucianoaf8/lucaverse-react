@@ -11,7 +11,7 @@ const iconMap = {
   huggingface: <SiHuggingface size={30} />,               // ← replace FaRobot with this
 };
 
-const SocialIcon = ({ type, href, style = {} }) => {
+const SocialIcon = ({ type, href, style = {}, orbitRadius = 120, angle = 0 }) => {
   const icon = iconMap[type];
 
   if (!icon) {
@@ -19,13 +19,21 @@ const SocialIcon = ({ type, href, style = {} }) => {
     return null;
   }
 
+  const orbitStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(${orbitRadius}px) rotate(-${angle}deg)`,
+    ...style,
+  };
+
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="social-icon floating-float-slow"
-      style={style}
+      className="social-icon"
+      style={orbitStyle}
     >
       {icon}
     </a>
