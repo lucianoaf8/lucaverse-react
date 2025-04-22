@@ -10,130 +10,95 @@ const BackgroundCanvas = () => {
     
     const ctx = canvas.getContext('2d');
     
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-    
-    // Handle window resize
-    const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
+    // Resize canvas to fit the window
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-    
-    window.addEventListener('resize', handleResize);
-    
-    // Define colors
-    const colors = {
-      background: '#0f011f',
-      backgroundFade: 'rgba(15, 1, 31, 0.4)',
-      neonPink: '#ff00c8',
-      neonBlue: '#00caff',
-      lightViolet: '#2a0f4a'
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Configuration
+    const config = {
+      nodeSpeed: 0.5, 
+      nodeDensity: 100, 
+      glowIntensity: 20, 
+      colors: ['#00FFFF', '#FF00FF', '#8A2BE2', '#4B0082'], 
+      lineColor: 'rgba(128, 0, 128, 0.3)', // Purple line color
     };
-    
-    // Create points
-    const pointsCount = 120;
-    const points = [];
-    for (let i = 0; i < pointsCount; i++) {
-      const color = Math.random() > 0.5 ? colors.neonPink : colors.neonBlue;
-      points.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        color: color
+
+    // Create nodes
+    const nodes = [];
+    for (let i = 0; i < config.nodeDensity; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        color: config.colors[Math.floor(Math.random() * config.colors.length)],
+        direction: Math.random() * Math.PI * 2,
       });
     }
-    
-    // Drawing function
-    function draw() {
-      // Background gradient
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, colors.background);
-      gradient.addColorStop(1, colors.lightViolet);
-      
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-      
-      ctx.fillStyle = colors.backgroundFade;
-      ctx.fillRect(0, 0, width, height);
-      
-      // Update point positions
-      for (let p of points) {
-        p.x += p.vx;
-        p.y += p.vy;
-        
-        // Bounce off walls
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-      }
-      
-      // Draw grid
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+
+    // Draw circuit lines
+    const drawLines = () => {
+      ctx.strokeStyle = config.lineColor;
       ctx.lineWidth = 1;
-      
-      const gridSize = 35;
-      for (let x = 0; x < width; x += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
-        ctx.stroke();
-      }
-      
-      for (let y = 0; y < height; y += gridSize) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-        ctx.stroke();
-      }
-      
-      // Draw connections between points
-      for (let i = 0; i < points.length; i++) {
-        for (let j = i + 1; j < points.length; j++) {
-          const p1 = points[i];
-          const p2 = points[j];
-          const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-          if (dist < 100) {
-            const opacity = (1 - dist / 100) * 0.5;
-            const hexOpacity = Math.floor(opacity * 255).toString(16).padStart(2, '0');
-            
-            let connectionColor = (p1.color === p2.color) 
-              ? p1.color 
-              : (Math.random() > 0.5 ? colors.neonPink : colors.neonBlue);
-            
-            ctx.lineWidth = 0.8;
-            ctx.strokeStyle = `${connectionColor}${hexOpacity}`;
-            ctx.shadowBlur = 4;
-            ctx.shadowColor = connectionColor;
+
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) {
             ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
             ctx.stroke();
-            ctx.shadowBlur = 0;
           }
         }
       }
-      
-      // Draw points
-      for (let p of points) {
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = p.color;
-        ctx.fillStyle = p.color;
+    };
+
+    // Draw nodes
+    const drawNodes = () => {
+      nodes.forEach(node => {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = node.color;
+        ctx.shadowColor = node.color;
+        ctx.shadowBlur = config.glowIntensity;
         ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-      
-      // Continue animation loop
-      requestAnimationFrame(draw);
-    }
-    
-    // Start drawing
-    draw();
+
+        // Pulsing effect
+        ctx.shadowBlur = config.glowIntensity + Math.sin(Date.now() * 0.01 + node.x) * 5;
+      });
+    };
+
+    // Update nodes position
+    const updateNodes = () => {
+      nodes.forEach(node => {
+        node.x += Math.cos(node.direction) * config.nodeSpeed;
+        node.y += Math.sin(node.direction) * config.nodeSpeed;
+
+        // Wrap around screen edges
+        if (node.x > canvas.width) node.x = 0;
+        if (node.x < 0) node.x = canvas.width;
+        if (node.y > canvas.height) node.y = 0;
+        if (node.y < 0) node.y = canvas.height;
+      });
+    };
+
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawLines();
+      drawNodes();
+      updateNodes();
+      requestAnimationFrame(animate);
+    };
+
+    // Start animation
+    animate();
     
     // Add loaded class to body after a short delay to enable animations
     setTimeout(() => {
@@ -142,7 +107,7 @@ const BackgroundCanvas = () => {
     
     // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
   

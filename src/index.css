@@ -58,6 +58,19 @@ body {
   }
 }
 
+
+@keyframes headerGlow {
+  0%, 100% { 
+      opacity: 0.5;
+      box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--electric-blue);
+  }
+  50% { 
+      opacity: 1;
+      box-shadow: 0 0 20px var(--neon-pink), 0 0 30px var(--electric-blue);
+  }
+}
+
+
 @keyframes pulse-glow-blue { 
   0%, 100% { box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue) inset; } 
   50% { box-shadow: 0 0 9px var(--neon-blue), 0 0 16px var(--neon-blue) inset; } 
