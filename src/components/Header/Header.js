@@ -33,13 +33,13 @@ const Header = () => {
           <div className="nav-right">
             <nav className={`nav-menu${menuOpen ? ' open' : ''}`}>
               <ul className="nav-menu-list">
-                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Home</button></li>
-                <li className="nav-menu-item"><button type="button" className="nav-menu-link">About</button></li>
-                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Projects</button></li>
-                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Custom GPTs</button></li>
-                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Contact Me</button></li>
-                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Blog</button></li>
-                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Newsletter</button></li>
+                <li className="nav-menu-item"><a href="#home" className="nav-menu-link">Home</a></li>
+                <li className="nav-menu-item"><a href="#about" className="nav-menu-link">About</a></li>
+                <li className="nav-menu-item"><a href="#projects" className="nav-menu-link">Projects</a></li>
+                <li className="nav-menu-item"><a href="#custom-gpts" className="nav-menu-link">Custom GPTs</a></li>
+                <li className="nav-menu-item"><a href="#contact" className="nav-menu-link">Contact Me</a></li>
+                <li className="nav-menu-item"><a href="https://blog.luca137.com" className="nav-menu-link nav-menu-link--external" target="_blank" rel="noopener noreferrer">Blog</a></li>
+                <li className="nav-menu-item"><a href="https://newsletter.luca137.com" className="nav-menu-link nav-menu-link--external" target="_blank" rel="noopener noreferrer">Newsletter</a></li>
               </ul>
               <div className="nav-cta-menu">
                 <ul className="nav-cta-menu-list">

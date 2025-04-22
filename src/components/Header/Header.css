@@ -88,6 +88,21 @@
   width: 100%;
 }
 
+.nav-menu-link--external {
+  color: var(--neon-pink) !important;
+  font-weight: bold;
+  border-bottom: 2px solid var(--neon-pink);
+  background: linear-gradient(90deg, rgba(255,105,180,0.08), rgba(0,202,255,0.05));
+  box-shadow: 0 2px 8px 0 rgba(255,105,180,0.09);
+}
+
+.nav-menu-link--external:hover {
+  color: var(--neon-blue) !important;
+  border-bottom: 2px solid var(--neon-blue);
+  background: linear-gradient(90deg, rgba(0,202,255,0.08), rgba(255,105,180,0.05));
+  box-shadow: 0 4px 16px 0 rgba(0,202,255,0.13);
+}
+
 @keyframes glitch {
   0% {
     text-shadow: 

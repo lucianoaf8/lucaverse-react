@@ -6,6 +6,9 @@ import GlitchAvatar from './GlitchAvatar';
 import AccessRequestForm from '../AccessRequestForm/AccessRequestForm';
 import ShutdownEffect from '../ShutdownEffect/ShutdownEffect'; // Import the new component
 import LucaverseExplosionEffect from './LucaverseExplosionEffect';
+import Projects from '../Projects/Projects'; // Import the Projects component
+import CustomGPTs from '../CustomGPTs/CustomGPTs'; // Import the CustomGPTs component
+import ContactMe from '../ContactMe/ContactMe'; // Import the ContactMe component
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiHuggingface } from 'react-icons/si';
 import './MainContent.css';
@@ -42,6 +45,7 @@ const MainContent = () => {
   };
   
   // Create explosion/crumbling effect
+  // eslint-disable-next-line no-unused-vars
   const createExplosionEffect = (element) => {
     const rect = element.getBoundingClientRect();
     const text = element.textContent;
@@ -60,6 +64,7 @@ const MainContent = () => {
     document.body.appendChild(container);
     
     // Hide the original element temporarily
+    // eslint-disable-next-line no-unused-vars
     const originalDisplay = element.style.display;
     element.style.visibility = 'hidden';
     
@@ -431,7 +436,7 @@ const MainContent = () => {
   }, []);
 
   return (
-    <main className="main-content">
+    <main className="main-content" id="home">
       {/* Shutdown Effect Component */}
       <ShutdownEffect 
         isActive={isShuttingDown} 
@@ -449,7 +454,7 @@ const MainContent = () => {
         />
       )}
       
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 min-h-[85vh] flex items-center">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 min-h-[85vh] flex items-center" id="about">
         <div className="hero-section w-full">
           {/* Left Column - Text */}
           <div className="flex flex-col justify-center text-center md:text-left relative z-10">
@@ -637,6 +642,15 @@ const MainContent = () => {
       
       {/* Access Request Form Modal */}
       <AccessRequestForm isOpen={isFormOpen} onClose={closeForm} />
+      
+      {/* Add the Projects component here */}
+      <Projects />
+      
+      {/* Add the CustomGPTs component here */}
+      <CustomGPTs />
+      
+      {/* Add the ContactMe component here */}
+      <ContactMe />
     </main>
   );
 };

@@ -3,12 +3,12 @@
   backdrop-filter: blur(var(--backdrop-blur-amount));
   border-top: 1px solid rgba(0, 202, 255, 0.3);
   padding: 15px 0;
-  position: fixed;
-  bottom: 0;
+  position: static;
   left: 0;
   width: 100%;
   z-index: 100;
   overflow: hidden;
+  margin-top: auto;
 }
 
 .footer-content {
@@ -24,8 +24,8 @@
   color: var(--light-gray);
   opacity: 0.8;
   font-size: 0.85rem;
-  text-align: center; /* ✅ added */
-  width: 100%; /* ✅ added */
+  text-align: center; /* added */
+  width: 100%; /* added */
   
 }
 
