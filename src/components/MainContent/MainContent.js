@@ -1,10 +1,11 @@
 // Updated src/components/MainContent/MainContent.js with shutdown effect
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import FloatingPanel from '../FloatingPanel/FloatingPanel';
 import GlitchAvatar from './GlitchAvatar';
 import AccessRequestForm from '../AccessRequestForm/AccessRequestForm';
 import ShutdownEffect from '../ShutdownEffect/ShutdownEffect'; // Import the new component
+import LucaverseExplosionEffect from './LucaverseExplosionEffect';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiHuggingface } from 'react-icons/si';
 import './MainContent.css';
@@ -12,9 +13,149 @@ import './MainContent.css';
 const MainContent = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isShuttingDown, setIsShuttingDown] = useState(false); // New state for shutdown effect
+  const [titleClickCount, setTitleClickCount] = useState(0);
+  const [isExploding, setIsExploding] = useState(false);
+  const [showExplosion, setShowExplosion] = useState(false);
+  const lucaverseTitleRef = useRef(null);
   
   const openForm = () => setIsFormOpen(true);
   const closeForm = () => setIsFormOpen(false);
+
+  // Handle clicks on Lucaverse title (Easter egg)
+  const handleLucaverseTitleClick = () => {
+    const newCount = titleClickCount + 1;
+    setTitleClickCount(newCount);
+    
+    // Trigger the explosion animation after 5 clicks
+    if (newCount === 5) {
+      setIsExploding(true);
+      setShowExplosion(true);
+      // Hide the title visually, explosion effect will take over
+      if (lucaverseTitleRef.current) {
+        lucaverseTitleRef.current.style.visibility = 'hidden';
+      }
+      setTimeout(() => {
+        setIsExploding(false);
+        setTitleClickCount(0);
+      }, 3000);
+    }
+  };
+  
+  // Create explosion/crumbling effect
+  const createExplosionEffect = (element) => {
+    const rect = element.getBoundingClientRect();
+    const text = element.textContent;
+    const container = document.createElement('div');
+    
+    // Set container style to match the position of the original element
+    container.style.position = 'fixed';
+    container.style.top = `${rect.top}px`;
+    container.style.left = `${rect.left}px`;
+    container.style.width = `${rect.width}px`;
+    container.style.height = `${rect.height}px`;
+    container.style.pointerEvents = 'none';
+    container.style.zIndex = '1000';
+    container.style.overflow = 'visible';
+    container.className = 'explosion-container';
+    document.body.appendChild(container);
+    
+    // Hide the original element temporarily
+    const originalDisplay = element.style.display;
+    element.style.visibility = 'hidden';
+    
+    // Create particles for each character
+    Array.from(text).forEach((char, index) => {
+      // Skip spaces
+      if (char === ' ') return;
+      
+      // Create multiple particles per character for better effect
+      const particleCount = Math.floor(Math.random() * 5) + 3; // 3-7 particles per character
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        
+        // Position particle relative to its character position
+        const charWidth = rect.width / text.length;
+        const xPos = (index * charWidth) + (Math.random() * charWidth);
+        
+        // Particle styling
+        particle.textContent = char;
+        particle.style.position = 'absolute';
+        particle.style.left = `${xPos}px`;
+        particle.style.top = `${Math.random() * 10}px`;
+        particle.style.fontFamily = 'Orbitron, sans-serif';
+        particle.style.fontSize = `${Math.random() * 10 + 20}px`; // Random size variation
+        particle.style.fontWeight = 'bold';
+        particle.style.color = i % 2 === 0 ? 'var(--neon-blue)' : 'var(--soft-pink)';
+        particle.style.textShadow = i % 2 === 0 ? 
+          '0 0 5px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 255, 255, 0.5)' : 
+          '0 0 5px rgba(255, 105, 180, 0.8), 0 0 10px rgba(255, 105, 180, 0.5)';
+        particle.style.transform = 'scale(1)';
+        particle.style.opacity = '1';
+        
+        // Calculate random direction for particle
+        const angle = Math.random() * Math.PI * 2; // Random angle in radians
+        const force = 10 + Math.random() * 20; // Random force magnitude
+        const xVelocity = Math.cos(angle) * force;
+        const yVelocity = Math.sin(angle) * force - 10; // Add upward bias
+        
+        // Apply animation
+        particle.animate([
+          { 
+            transform: 'scale(1) rotate(0deg)',
+            opacity: 1,
+            offset: 0
+          },
+          { 
+            transform: `translate(${xVelocity * 10}px, ${yVelocity * 10}px) scale(1.2) rotate(${Math.random() * 360}deg)`,
+            opacity: 0.8,
+            offset: 0.3
+          },
+          { 
+            transform: `translate(${xVelocity * 20}px, ${yVelocity * 20 + 50}px) scale(0.5) rotate(${Math.random() * 720}deg)`,
+            opacity: 0,
+            offset: 1
+          }
+        ], {
+          duration: 1500 + Math.random() * 1000,
+          easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)',
+          fill: 'forwards'
+        });
+        
+        container.appendChild(particle);
+      }
+    });
+    
+    // Add a shockwave effect
+    const shockwave = document.createElement('div');
+    shockwave.style.position = 'absolute';
+    shockwave.style.top = '50%';
+    shockwave.style.left = '50%';
+    shockwave.style.transform = 'translate(-50%, -50%)';
+    shockwave.style.width = '10px';
+    shockwave.style.height = '10px';
+    shockwave.style.borderRadius = '50%';
+    shockwave.style.background = 'rgba(0, 255, 255, 0.3)';
+    shockwave.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(255, 105, 180, 0.5)';
+    shockwave.style.zIndex = '-1';
+    container.appendChild(shockwave);
+    
+    // Animate shockwave
+    shockwave.animate([
+      { transform: 'translate(-50%, -50%) scale(0)', opacity: 0.8 },
+      { transform: 'translate(-50%, -50%) scale(15)', opacity: 0 }
+    ], {
+      duration: 1000,
+      easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)',
+      fill: 'forwards'
+    });
+    
+    // Restore visibility after animation
+    setTimeout(() => {
+      element.style.visibility = 'visible';
+      container.remove();
+    }, 2000);
+  };
 
   // Handle the "Enter the Lucaverse" button click
   const handleEnterLucaverse = () => {
@@ -296,6 +437,17 @@ const MainContent = () => {
         isActive={isShuttingDown} 
         onComplete={handleShutdownComplete} 
       />
+      {showExplosion && (
+        <LucaverseExplosionEffect
+          crackedText="Lucaverse"
+          onComplete={() => {
+            setShowExplosion(false);
+            if (lucaverseTitleRef.current) {
+              lucaverseTitleRef.current.style.visibility = 'visible';
+            }
+          }}
+        />
+      )}
       
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 min-h-[85vh] flex items-center">
         <div className="hero-section w-full">
@@ -304,14 +456,21 @@ const MainContent = () => {
             <h1 className="font-orbitron text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-wider leading-tight init-hidden fade-in-left delay-1">
               <span className="block text-[color:var(--soft-pink)] text-glow-pink">Welcome</span>
               <span className="block text-[color:var(--soft-pink)] text-glow-pink text-xl sm:text-3xl lg:text-4xl mb-2">to the</span>
-              <span id="lucaverse-title" className="block text-[color:var(--neon-blue)] text-glow-blue transition-all duration-300 glitch-active">Lucaverse</span>
+              <span 
+                id="lucaverse-title" 
+                ref={lucaverseTitleRef}
+                className={`block text-[color:var(--neon-blue)] text-glow-blue transition-all duration-300 glitch-active ${isExploding ? 'exploding' : ''}`}
+                onClick={handleLucaverseTitleClick}
+                style={{ cursor: 'pointer' }}
+              >
+                Lucaverse
+              </span>
             </h1>
             <p className="mt-5 text-lg sm:text-xl text-gray-300 max-w-md mx-auto md:mx-0 init-hidden fade-in-left delay-2">
               A digital universe of tools, thoughts, and resources curated by Luca.
             </p>
             <div className="mt-8 init-hidden fade-in-up delay-3 flex flex-col items-center md:items-start gap-4">
               <CTAButton 
-                subLabel="If you dare"
                 onClick={handleEnterLucaverse}
               >
                 Enter The Lucaverse

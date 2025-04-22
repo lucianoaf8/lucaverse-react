@@ -37,6 +37,42 @@
   animation: glitch 500ms infinite linear alternate-reverse;
 }
 
+/* Easter egg explosion effects */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  25% { opacity: 0.8; }
+  50% { opacity: 1; }
+  75% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+#lucaverse-title {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+#lucaverse-title:hover {
+  text-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-blue);
+}
+
+#lucaverse-title.exploding {
+  animation: pulse 0.3s ease-in-out 2, flicker 0.2s ease-in-out 3;
+}
+
+.explosion-container div {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  will-change: transform, opacity;
+}
+
 /* Spacing for text elements */
 .font-orbitron span {
   display: block;

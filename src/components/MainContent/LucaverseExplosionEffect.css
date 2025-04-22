@@ -1,0 +1,13 @@
+.lucaverse-explosion-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 99999;
+  pointer-events: none;
+  background: rgba(0,0,0,0.12);
+  transition: background 0.3s;
+}
+.lucaverse-explosion-canvas {
+  position: absolute;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+}
