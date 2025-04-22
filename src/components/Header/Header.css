@@ -265,13 +265,24 @@
     display: flex !important;
   }
   .nav-menu-list {
-    flex-direction: column;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
     width: 100%;
-    align-items: flex-start;
     gap: 0.6rem;
   }
   .nav-menu-item {
     margin: 0 0 10px 20px;
+  }
+  .nav-cta-menu-list {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100%;
+    gap: 0.6rem;
+  }
+  .nav-cta-menu-item {
+    margin-left: 0 !important;
+    margin-bottom: 10px;
   }
   .navbar-container {
     padding: 0 8px;
@@ -297,28 +308,6 @@
   .nav-menu-link {
     font-size: 0.98rem;
     padding: 6px 0;
-  }
-}
-
-/* --- FIX: Ensure menu always visible on mobile --- */
-@media (max-width: 768px) {
-  .nav-menu,
-  .nav-menu-list {
-    display: flex !important;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-    background: none;
-    position: static;
-    box-shadow: none;
-  }
-}
-
-/* Remove problematic display:none for menu on mobile */
-@media (max-width: 768px) {
-  .nav-menu-list[style*="display: none"],
-  .nav-menu[style*="display: none"] {
-    display: flex !important;
   }
 }
 

@@ -32,17 +32,15 @@ const Header = () => {
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
           <div className="nav-right">
             <nav className={`nav-menu${menuOpen ? ' open' : ''}`}>
-              <div className="nav-menu">
-                <ul className="nav-menu-list">
-                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Home</button></li>
-                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">About</button></li>
-                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Projects</button></li>
-                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Custom GPTs</button></li>
-                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Contact Me</button></li>
-                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Blog</button></li>
-                  <li className="nav-menu-item"><button type="button" className="nav-menu-link">Newsletter</button></li>
-                </ul>
-              </div>
+              <ul className="nav-menu-list">
+                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Home</button></li>
+                <li className="nav-menu-item"><button type="button" className="nav-menu-link">About</button></li>
+                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Projects</button></li>
+                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Custom GPTs</button></li>
+                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Contact Me</button></li>
+                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Blog</button></li>
+                <li className="nav-menu-item"><button type="button" className="nav-menu-link">Newsletter</button></li>
+              </ul>
               <div className="nav-cta-menu">
                 <ul className="nav-cta-menu-list">
                   <li className="nav-cta-menu-item">
