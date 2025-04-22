@@ -5,10 +5,20 @@ const GlitchAvatar = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+    // DEBUG: Remove border and background now that image is visible
+    // canvas.style.border = '2px dashed #00caff';
+    // canvas.style.background = '#1a0033';
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     const img = new Image();
-    img.src = '/avatar-luca.png'; 
-    
+    img.src = process.env.PUBLIC_URL ? `${process.env.PUBLIC_URL}/avatar-luca.png` : '/avatar-luca.png';
+    img.onerror = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ff00c8';
+      ctx.font = '20px Orbitron, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Image Not Found', canvas.width / 2, canvas.height / 2);
+    };
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;

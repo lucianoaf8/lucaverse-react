@@ -108,6 +108,42 @@ body {
 /* Loaded state animations */
 .loaded .init-hidden { opacity: 1; transform: translate(0, 0); }
 
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  body {
+    font-size: 1rem;
+  }
+  .font-orbitron {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.95rem;
+    padding: 0 8px;
+  }
+  .font-orbitron {
+    font-size: 1.5rem;
+  }
+  .text-glow-pink, .text-glow-blue {
+    text-shadow: 0 0 4px var(--neon-pink), 0 0 6px var(--neon-pink);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 0.9rem;
+    padding: 0 4px;
+  }
+  .font-orbitron {
+    font-size: 1.1rem;
+  }
+  .text-glow-pink, .text-glow-blue {
+    text-shadow: 0 0 2px var(--neon-pink), 0 0 3px var(--neon-pink);
+  }
+}
+
 /* Responsive styling */
 @media (max-width: 768px) {
   .footer-content {

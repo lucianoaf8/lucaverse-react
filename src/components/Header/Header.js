@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen((open) => !open);
+
   return (
     <header className="site-header init-hidden fade-in-down">
       <div className="navbar-container">
@@ -15,9 +19,20 @@ const Header = () => {
               />
             </a>
           </div>
+          <button
+            className={`hamburger${menuOpen ? ' open' : ''}`}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={toggleMenu}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
           <div className="nav-right">
-            <div className="nav-menu">
+            <nav className={`nav-menu${menuOpen ? ' open' : ''}`}>
+              <div className="nav-menu">
                 <ul className="nav-menu-list">
                   <li className="nav-menu-item"><button type="button" className="nav-menu-link">Home</button></li>
                   <li className="nav-menu-item"><button type="button" className="nav-menu-link">About</button></li>
@@ -38,8 +53,9 @@ const Header = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </nav>
           </div>
+        </div>
         </nav>
         <div className="nav-glow"></div>
       </div>
