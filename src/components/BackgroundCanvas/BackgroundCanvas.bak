@@ -1,0 +1,136 @@
+import React, { useEffect, useRef } from 'react';
+import './BackgroundCanvas.css';
+
+const BackgroundCanvas = () => {
+  const canvasRef = useRef(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Resize canvas to fit the window
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Configuration
+    const config = {
+      nodeSpeed: 0.5, 
+      nodeDensity: 100, 
+      glowIntensity: 20, 
+      colors: ['#00FFFF', '#FF00FF', '#8A2BE2', '#4B0082'], 
+      lineColor: 'rgba(128, 0, 128, 0.3)', // Purple line color
+      maxLinkDistance: 150, // maximum distance for line connections
+    };
+
+    // Create nodes
+    const nodes = [];
+    for (let i = 0; i < config.nodeDensity; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        color: config.colors[Math.floor(Math.random() * config.colors.length)],
+        direction: Math.random() * Math.PI * 2,
+      });
+    }
+
+    // Draw circuit lines
+    const drawLines = () => {
+      // Dynamic line styling per distance
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < config.maxLinkDistance) {
+            const alpha = 1 - distance / config.maxLinkDistance;
+            ctx.strokeStyle = `rgba(128, 0, 128, ${alpha * 0.5 + 0.1})`;
+            ctx.lineWidth = alpha * 2;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    // Draw nodes
+    const drawNodes = () => {
+      nodes.forEach(node => {
+        ctx.beginPath();
+        const radius = 2 + Math.abs(Math.sin(Date.now() * 0.005 + node.x)) * 2;
+        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = node.color;
+        ctx.shadowColor = node.color;
+        ctx.shadowBlur = config.glowIntensity + Math.sin(Date.now() * 0.005 + (node.x + node.y) * 0.01) * 5;
+        ctx.fill();
+      });
+    };
+
+    // Update nodes position
+    const updateNodes = () => {
+      nodes.forEach(node => {
+        node.x += Math.cos(node.direction) * config.nodeSpeed;
+        node.y += Math.sin(node.direction) * config.nodeSpeed;
+
+        // Wrap around screen edges
+        if (node.x > canvas.width) node.x = 0;
+        if (node.x < 0) node.x = canvas.width;
+        if (node.y > canvas.height) node.y = 0;
+        if (node.y < 0) node.y = canvas.height;
+      });
+    };
+
+    // Animation loop
+    const animate = () => {
+      // Clear and render futuristic radial background
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const radialGradient = ctx.createRadialGradient(
+        canvas.width / 2,
+        canvas.height / 2,
+        0,
+        canvas.width / 2,
+        canvas.height / 2,
+        Math.sqrt(canvas.width * canvas.width + canvas.height * canvas.height) / 2
+      );
+      radialGradient.addColorStop(0, 'rgba(10, 10, 35, 0.7)');
+      radialGradient.addColorStop(1, 'rgba(0, 0, 0, 0.95)');
+      ctx.fillStyle = radialGradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Glowing composite for lines and nodes
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      drawLines();
+      drawNodes();
+      ctx.restore();
+
+      updateNodes();
+      requestAnimationFrame(animate);
+    };
+
+    // Start animation
+    animate();
+    
+    // Add loaded class to body after a short delay to enable animations
+    setTimeout(() => {
+      document.body.classList.add('loaded');
+    }, 100);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, []);
+  
+  return <canvas id="background-canvas" ref={canvasRef} />;
+};
+
+export default BackgroundCanvas;
