@@ -53,18 +53,69 @@
   margin-right: 15px;
 }
 
+
 .nav-menu-link {
   color: var(--light-gray);
   text-decoration: none;
   transition: color 0.3s ease;
   font-size: 1.1rem;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  position: relative;
 }
 
 .nav-menu-link:hover {
+  animation: glitch 500ms infinite linear alternate-reverse;
   color: var(--neon-blue);
-  text-shadow: 0 0 8px var(--neon-blue);
+  text-shadow: 0 0 var(--glow-blur) var(--neon-blue), 0 0 var(--glow-blur-strong) var(--neon-blue);
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
+
+@keyframes glitch {
+  0% {
+    text-shadow: 
+      1px 0 0 var(--neon-blue),
+      -1px 0 0 var(--neon-pink),
+      0 1px 0 var(--neon-blue),
+      0 -1px 0 var(--neon-pink);
+  }
+  20% {
+    text-shadow: 
+      -1px 0 0 var(--neon-blue),
+      1px 0 0 var(--neon-pink),
+      0 -1px 0 var(--neon-blue),
+      0 1px 0 var(--neon-pink);
+  }
+  40% {
+    text-shadow: 
+      0.5px 0.5px 0 var(--neon-blue),
+      -0.5px -0.5px 0 var(--neon-pink),
+      0.5px -0.5px 0 var(--neon-blue),
+      -0.5px 0.5px 0 var(--neon-pink);
+  }
+  60% {
+    text-shadow: 
+      -0.5px 0.5px 0 var(--neon-blue),
+      0.5px -0.5px 0 var(--neon-pink),
+      -0.5px -0.5px 0 var(--neon-blue),
+      0.5px 0.5px 0 var(--neon-pink);
+  }
+  80% {
+    text-shadow: 
+      1px 1px 0 var(--neon-blue),
+      -1px -1px 0 var(--neon-pink),
+      1px -1px 0 var(--neon-blue),
+      -1px 1px 0 var(--neon-pink);
+  }
+  100% {
+    text-shadow: 
+      -1px 1px 0 var(--neon-blue),
+      1px -1px 0 var(--neon-pink),
+      -1px -1px 0 var(--neon-blue),
+      1px 1px 0 var(--neon-pink);
+  }
+}
+
 
 .nav-cta-menu {
   margin-left: 20px;
