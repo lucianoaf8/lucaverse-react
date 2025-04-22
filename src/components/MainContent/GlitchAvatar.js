@@ -20,8 +20,22 @@ const GlitchAvatar = () => {
       ctx.fillText('Image Not Found', canvas.width / 2, canvas.height / 2);
     };
     img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
+      // Set canvas to a fixed large size - make sure it's relatively square
+      canvas.width = 750;  
+      canvas.height = 750;
+
+      // Calculate scaling to make image fit WITHIN the canvas while maintaining aspect ratio
+      // This will prevent cropping at top and bottom
+      const scale = Math.min(canvas.width / img.width, canvas.height / img.height) * 0.95; // 95% of max size to add some padding
+      const scaledWidth = img.width * scale;
+      const scaledHeight = img.height * scale;
+      const x = (canvas.width - scaledWidth) / 2;
+      const y = (canvas.height - scaledHeight) / 2;
+
+      function drawBaseImage() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
+      }
 
       function glitchFrame() {
         const jitterX = Math.random() * 2 - 1;
@@ -29,6 +43,9 @@ const GlitchAvatar = () => {
 
         ctx.save();
         ctx.translate(jitterX, jitterY);
+
+        // Draw the base image first
+        drawBaseImage();
 
         // Random glitch patterns
         const glitchType = Math.random();
@@ -43,18 +60,21 @@ const GlitchAvatar = () => {
             }
           }
         } else if (glitchType < 0.6) {
-          // Fragmented image glitch
+          // Fragmented image glitch - use scaled coordinates
           const glitchAreaCount = 6 + Math.floor(Math.random() * 5);
           for (let i = 0; i < glitchAreaCount; i++) {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            const width = Math.random() * (canvas.width / 3);
-            const height = Math.random() * (canvas.height / 6);
+            // Use the scaled image area for fragments
+            const sx = x + Math.random() * scaledWidth;
+            const sy = y + Math.random() * scaledHeight;
+            const sWidth = Math.random() * (scaledWidth / 3);
+            const sHeight = Math.random() * (scaledHeight / 6);
 
-            const dx = x + (Math.random() * 40 - 20);
-            const dy = y + (Math.random() * 40 - 20);
+            const dx = sx + (Math.random() * 40 - 20);
+            const dy = sy + (Math.random() * 40 - 20);
 
-            ctx.drawImage(img, x, y, width, height, dx, dy, width, height);
+            ctx.drawImage(img, 
+              (sx - x) / scale, (sy - y) / scale, sWidth / scale, sHeight / scale, 
+              dx, dy, sWidth, sHeight);
           }
         } 
 
@@ -68,14 +88,14 @@ const GlitchAvatar = () => {
       }
 
       function loop() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
+        // Draw the base image properly scaled
+        drawBaseImage();
 
         setTimeout(() => {
           glitchFrame();
           setTimeout(() => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0);
+            // Redraw the base image properly scaled
+            drawBaseImage();
             loop();
           }, 50 + Math.random() * 80); 
         }, 8000 + Math.random() * 5000); 
@@ -86,10 +106,15 @@ const GlitchAvatar = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="max-h-[65%] md:max-h-[70%] w-auto object-contain"
-      style={{ maxWidth: '100%', height: 'auto' }}
+    <canvas 
+      ref={canvasRef} 
+      style={{ 
+        width: '100%', 
+        height: '100%', 
+        objectFit: 'contain',
+        background: 'transparent',
+        display: 'block'
+      }} 
     />
   );
 };

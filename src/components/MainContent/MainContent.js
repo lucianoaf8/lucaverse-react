@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import CTAButton from '../CTAButton/CTAButton';
 import FloatingPanel from '../FloatingPanel/FloatingPanel';
 import GlitchAvatar from './GlitchAvatar';
-import SocialIcon from '../SocialIcon/SocialIcon'; 
 import AccessRequestForm from '../AccessRequestForm/AccessRequestForm';
 import ShutdownEffect from '../ShutdownEffect/ShutdownEffect'; // Import the new component
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { SiHuggingface } from 'react-icons/si';
 import './MainContent.css';
 
 const MainContent = () => {
@@ -297,8 +298,7 @@ const MainContent = () => {
       />
       
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 min-h-[85vh] flex items-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
-
+        <div className="hero-section w-full">
           {/* Left Column - Text */}
           <div className="flex flex-col justify-center text-center md:text-left relative z-10">
             <h1 className="font-orbitron text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-wider leading-tight init-hidden fade-in-left delay-1">
@@ -312,11 +312,10 @@ const MainContent = () => {
             <div className="mt-8 init-hidden fade-in-up delay-3 flex flex-col items-center md:items-start gap-4">
               <CTAButton 
                 subLabel="If you dare"
-                onClick={handleEnterLucaverse} // Add onClick handler
+                onClick={handleEnterLucaverse}
               >
                 Enter The Lucaverse
               </CTAButton>
-
               <div className="self-center md:self-start ml-12">
                 <CTAButton 
                   size="small" 
@@ -328,77 +327,151 @@ const MainContent = () => {
               </div>
             </div>
           </div>
-          
-          {/* Right Column - Avatar + Panels */}
-          <div className="relative flex items-center justify-center min-h-[500px]">
-            <div className="social-icon-container">
-            <SocialIcon 
-              type="github" 
-              href="https://github.com/lucianoaf8" 
-              orbitRadius={200} // Increase this value
-              angle={0}
-            />
-
-            <SocialIcon 
-              type="linkedin" 
-              href="https://www.linkedin.com/in/lucianoaf8" 
-              orbitRadius={200} // Increase this value
-              angle={90}
-            />
-
-            <SocialIcon 
-              type="email" 
-              href="mailto:your@email.com" 
-              orbitRadius={200} // Increase this value
-              angle={180}
-            />
-
-            <SocialIcon 
-              type="huggingface" 
-              href="https://huggingface.co/Luca137" 
-              orbitRadius={200} // Increase this value
-              angle={270}
-            />
-            </div>
-
-
+          {/* Right Column - Panels, Avatar, Icons (single structure) */}
+          <div className="right-hero-col">
             {/* Avatar centered inside */}
-            <div className="avatar-container" style={{ marginTop: '30px', filter: 'brightness(0.9)' }}>
+            <div className="avatar-container" style={{ filter: 'brightness(0.9)' }}>
               <GlitchAvatar />
             </div>
-
+            
+            {/* Social icons orbiting - simple version with direct inline styles */}
+            <div className="social-icon-container" style={{ 
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%) translateY(60px)',
+              width: '100%',
+              height: '100%',
+              zIndex: 20
+            }}>
+              {/* GitHub Icon */}
+              <a href="https://github.com/lucianoaf8" target="_blank" rel="noopener noreferrer"
+                 style={{
+                   position: 'absolute',
+                   top: '50%',
+                   left: '50%',
+                   transform: 'translate(-50%, -50%) rotate(0deg) translateX(400px) rotate(0deg)',
+                   display: 'flex',
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   width: '60px',
+                   height: '60px',
+                   backgroundColor: 'rgba(15, 1, 31, 0.8)',
+                   borderRadius: '50%',
+                   boxShadow: '0 0 12px var(--neon-blue)',
+                   zIndex: 50,
+                   animation: 'orbit 60s linear infinite',
+                   fontSize: '30px',
+                   color: 'var(--neon-blue)'
+                 }}>
+                <FaGithub size={30} />
+              </a>
+              
+              {/* LinkedIn Icon */}
+              <a href="https://www.linkedin.com/in/lucianoaf8" target="_blank" rel="noopener noreferrer"
+                 style={{
+                   position: 'absolute',
+                   top: '50%',
+                   left: '50%',
+                   transform: 'translate(-50%, -50%) rotate(90deg) translateX(400px) rotate(-90deg)',
+                   display: 'flex',
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   width: '60px',
+                   height: '60px',
+                   backgroundColor: 'rgba(15, 1, 31, 0.8)',
+                   borderRadius: '50%',
+                   boxShadow: '0 0 12px var(--neon-blue)',
+                   zIndex: 50,
+                   animation: 'orbit 60s linear infinite',
+                   animationDelay: '-15s',
+                   fontSize: '30px',
+                   color: 'var(--neon-blue)'
+                 }}>
+                <FaLinkedin size={30} />
+              </a>
+              
+              {/* Email Icon */}
+              <a href="mailto:your@email.com" target="_blank" rel="noopener noreferrer"
+                 style={{
+                   position: 'absolute',
+                   top: '50%',
+                   left: '50%',
+                   transform: 'translate(-50%, -50%) rotate(180deg) translateX(400px) rotate(-180deg)',
+                   display: 'flex',
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   width: '60px',
+                   height: '60px',
+                   backgroundColor: 'rgba(15, 1, 31, 0.8)',
+                   borderRadius: '50%',
+                   boxShadow: '0 0 12px var(--neon-blue)',
+                   zIndex: 50,
+                   animation: 'orbit 60s linear infinite',
+                   animationDelay: '-30s',
+                   fontSize: '30px',
+                   color: 'var(--neon-blue)'
+                 }}>
+                <FaEnvelope size={30} />
+              </a>
+              
+              {/* HuggingFace Icon */}
+              <a href="https://huggingface.co/Luca137" target="_blank" rel="noopener noreferrer"
+                 style={{
+                   position: 'absolute',
+                   top: '50%',
+                   left: '50%',
+                   transform: 'translate(-50%, -50%) rotate(270deg) translateX(400px) rotate(-270deg)',
+                   display: 'flex',
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   width: '60px',
+                   height: '60px',
+                   backgroundColor: 'rgba(15, 1, 31, 0.8)',
+                   borderRadius: '50%',
+                   boxShadow: '0 0 12px var(--neon-blue)',
+                   zIndex: 50,
+                   animation: 'orbit 60s linear infinite',
+                   animationDelay: '-45s',
+                   fontSize: '30px',
+                   color: 'var(--neon-blue)'
+                 }}>
+                <SiHuggingface size={30} />
+              </a>
+            </div>
+            
             {/* Floating Panels */}
-            <FloatingPanel 
-              title="Mission" 
-              glowColor="blue"
-              className="w-64 floating-float-medium"
-              style={{ top: '0%', right: '-20%' }}
-              animationDelay="delay-3"
-            >
-              A gateway to my builds, my thoughts, my tools.
-              Lucaverse.dev is where experiments become reality.
-            </FloatingPanel>
+            <div className="hero-panels">
+              <FloatingPanel 
+                title="Mission" 
+                glowColor="blue"
+                className="w-64 floating-float-medium"
+                style={{ top: '0%', right: '-20%' }}
+                animationDelay="delay-3"
+              >
+                A gateway to my builds, my thoughts, my tools. Lucaverse.dev is where experiments become reality.
+              </FloatingPanel>
 
-            <FloatingPanel 
-              title="Vision" 
-              glowColor="blue"
-              className="w-64 floating-float-slow"
-              style={{ top: '55%', left: '-20%' }}
-              animationDelay="delay-4"
-            >
-              A growing galaxy of scripts, side quests, and whispers.
-              It's not about polish; it's about presence.
-            </FloatingPanel>
+              <FloatingPanel 
+                title="Vision" 
+                glowColor="blue"
+                className="w-64 floating-float-slow"
+                style={{ top: '55%', left: '-20%' }}
+                animationDelay="delay-4"
+              >
+                A growing galaxy of scripts, side quests, and whispers. It's not about polish; it's about presence.
+              </FloatingPanel>
 
-            <FloatingPanel 
-              title="Luca" 
-              glowColor="pink"
-              className="w-64 floating-float-fast"
-              style={{ bottom: '-15%', right: '-15%' }}
-              animationDelay="delay-5"
-            >
-              The Architect
-            </FloatingPanel>
+              <FloatingPanel 
+                title="Luca" 
+                glowColor="pink"
+                className="w-64 floating-float-fast"
+                style={{ bottom: '-15%', right: '-15%' }}
+                animationDelay="delay-5"
+              >
+                The Architect
+              </FloatingPanel>
+            </div>
           </div>
         </div>
       </section>

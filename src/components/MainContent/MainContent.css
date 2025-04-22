@@ -76,6 +76,67 @@
   }
 }
 
+@media (max-width: 776px) {
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-panels {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    margin-bottom: 18px;
+  }
+  .floating-panel {
+    width: 95vw;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 12px 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  .avatar-container {
+    display: flex !important;
+    position: static !important;
+    margin: 18px auto 10px auto;
+    justify-content: center;
+    align-items: center;
+    max-width: 60vw;
+    max-height: 30vw;
+    min-width: 80px;
+    min-height: 80px;
+  }
+  .avatar-container canvas {
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 60px;
+    min-height: 60px;
+  }
+  .social-icon-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    position: static !important;
+    margin: 16px 0 0 0;
+    width: 100%;
+    z-index: 10;
+    height: auto;
+    transform: none !important;
+  }
+  .social-icon {
+    position: static !important;
+    animation: none !important;
+    width: 32px;
+    height: 32px;
+  }
+}
+
 @media (max-width: 768px) {
   .main-content {
     padding-bottom: 30px;
@@ -141,7 +202,69 @@
   }
 }
 
-/* Add this to MainContent.css */
+/* Responsive Avatar Container */
+@media (max-width: 768px) {
+  .avatar-container {
+    max-width: 60vw;
+    max-height: 30vw;
+    /* Uncomment below to fix to bottom left on mobile:
+    /* position: fixed; left: 10px; bottom: 10px; z-index: 10; */
+  }
+  .floating-panel {
+    max-width: 95vw;
+    padding: 12px 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  .floating-panel .panel-title {
+    font-size: 1.1rem;
+  }
+  .floating-panel .panel-content {
+    font-size: 0.96rem;
+  }
+}
+@media (max-width: 480px) {
+  .avatar-container {
+    max-width: 80vw;
+    max-height: 40vw;
+  }
+  .floating-panel {
+    max-width: 98vw;
+    padding: 8px 5px;
+    font-size: 0.95rem;
+  }
+}
+
+/* HERO SECTION LAYOUT */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* PANELS CONTAINER */
+.hero-panels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .hero-panels {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .floating-panel {
+    width: 95vw;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* SOCIAL ICONS */
 .social-icon-container {
   position: absolute;
   top: 50%;
@@ -149,31 +272,27 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  z-index: 2; 
+  z-index: 3; 
   --orbit-radius: 300px; /* Define the orbit radius here */
 }
 
 .social-icon {
   position: absolute;
   animation: orbit 60s linear infinite;
-  z-index: 2;
+  z-index: 3;
   --orbit-radius: 300px; /* Define the orbit radius here */
-  animation: orbit 60s linear infinite;
 }
 
 /* To stagger the animation start time for each icon */
 .social-icon:nth-child(1) {
   animation-delay: 0s;
 }
-
 .social-icon:nth-child(2) {
   animation-delay: 15s;
 }
-
 .social-icon:nth-child(3) {
   animation-delay: 30s;
 }
-
 .social-icon:nth-child(4) {
   animation-delay: 45s;
 }
@@ -184,5 +303,108 @@
   }
   100% {
     transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .social-icon-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    position: static !important;
+    margin: 16px 0 0 0;
+    width: 100%;
+    z-index: 10;
+    height: auto;
+    transform: none !important;
+  }
+  .social-icon {
+    position: static !important;
+    animation: none !important;
+    width: 32px;
+    height: 32px;
+  }
+}
+@media (max-width: 480px) {
+  .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Reset the container layout to a standard two column grid */
+  .hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  /* Reset and rebuild right column */
+  .right-hero-col {
+    position: relative !important;
+    height: 500px !important;
+    width: 100% !important;
+    /* Very important: the float panels need this to position properly */
+    overflow: visible !important; 
+  }
+
+  /* Avatar centered in right column */
+  .avatar-container {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) translateY(60px) !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+    width: 750px !important;
+    height: 750px !important;
+    object-fit: contain !important;
+    overflow: visible !important;
+  }
+
+  .avatar-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+    image-rendering: crisp-edges !important;
+  }
+
+  /* Social icons container for orbiting */
+  .social-icon-container {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) translateY(60px) !important; /* Match avatar position offset */
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 2 !important;
+    display: block !important;
+  }
+
+  /* Individual social icons should be absolutely positioned and animated */
+  .social-icon {
+    position: absolute !important;
+    animation: orbit 60s linear infinite !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  /* Ensure panels container doesn't use flex on desktop */
+  .hero-panels {
+    position: static !important;
+    display: block !important;
+  }
+
+  /* Most important: ensure floating panels are absolutely positioned */
+  .floating-panel {
+    position: absolute !important;
+    width: 260px !important;
+    margin: 0 !important;
+    z-index: 5 !important;
   }
 }

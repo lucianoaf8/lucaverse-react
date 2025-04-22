@@ -11,7 +11,7 @@ const iconMap = {
   huggingface: <SiHuggingface size={30} />,               // ← replace FaRobot with this
 };
 
-const SocialIcon = ({ type, href, style = {}, orbitRadius = 120, angle = 0 }) => {
+const SocialIcon = ({ type, href, style = {}, orbitRadius = 400, angle = 0 }) => {
   const icon = iconMap[type];
 
   if (!icon) {
@@ -19,6 +19,8 @@ const SocialIcon = ({ type, href, style = {}, orbitRadius = 120, angle = 0 }) =>
     return null;
   }
 
+  // For desktop: absolute positioning in orbit
+  // For mobile: static positioning in a row
   const orbitStyle = {
     position: 'absolute',
     top: '50%',
@@ -32,7 +34,7 @@ const SocialIcon = ({ type, href, style = {}, orbitRadius = 120, angle = 0 }) =>
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="social-icon"
+      className={`social-icon social-icon-${type}`}
       style={orbitStyle}
     >
       {icon}

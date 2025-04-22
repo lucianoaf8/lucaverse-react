@@ -1,66 +1,85 @@
 /* src/components/SocialIcon/SocialIcon.css */
-.social-icon {
-    position: absolute;
-    font-size: 30px;
-    color: var(--neon-blue);
-    background: rgba(15, 1, 31, 0.5);
-    backdrop-filter: blur(6px);
-    padding: 10px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    box-shadow: 0 0 8px var(--neon-blue);
-    z-index: 30; /* 🚀 Now higher than FloatingPanels (z-index: 10) */
-  }
-  
-  
-  .social-icon:hover {
-    transform: scale(1.3);
-    box-shadow: 0 0 14px var(--neon-pink);
-    color: var(--neon-pink);
-  }
-  
-  /* Responsiveness */
-  @media (max-width: 768px) {
-    .social-icon {
-      display: none;
-    }
+/* Reset all social icon styles for desktop */
+@media (min-width: 769px) {
+  .social-icon {
+    position: absolute !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    color: var(--neon-blue) !important;
+    background: rgba(15, 1, 31, 0.7) !important;
+    backdrop-filter: blur(6px) !important;
+    padding: 10px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 12px var(--neon-blue) !important;
+    width: 60px !important;
+    height: 60px !important;
+    z-index: 30 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    animation: orbit 60s linear infinite !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   }
 
-    
-  /* To stagger the animation start time for each icon */
-  .social-icon-container .social-icon:nth-child(1) {
-    animation-delay: 0s;
+  /* Individual icon positions and delays */
+  .social-icon-github {
+    animation-delay: 0s !important;
+    --orbit-radius: 400px !important;
   }
   
-  .social-icon-container .social-icon:nth-child(2) {
-    animation-delay: -15s; /* Negative delay to start the animation at different points */
+  .social-icon-linkedin {
+    animation-delay: -15s !important;
+    --orbit-radius: 400px !important;
   }
   
-  .social-icon-container .social-icon:nth-child(3) {
-    animation-delay: -30s;
+  .social-icon-email {
+    animation-delay: -30s !important;
+    --orbit-radius: 400px !important;
   }
   
-  .social-icon-container .social-icon:nth-child(4) {
-    animation-delay: -45s;
+  .social-icon-huggingface {
+    animation-delay: -45s !important;
+    --orbit-radius: 400px !important;
   }
-  
-  
-/* Update SocialIcon.css */
-.social-icon {
-  animation: orbit 60s linear infinite;
 }
 
+/* Orbit animation */
 @keyframes orbit {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);
-    z-index: -1;
-  }
-  50% {
-    transform: translate(-50%, -50%) rotate(180deg) translateX(var(--orbit-radius)) rotate(-180deg);
-    z-index: 1;
+    transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius, 400px)) rotate(0deg);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);
-    z-index: -1;
+    transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius, 400px)) rotate(-360deg);
+  }
+}
+
+/* Hover styles */
+.social-icon:hover {
+  transform: scale(1.3) !important;
+  box-shadow: 0 0 20px var(--neon-pink) !important;
+  color: var(--neon-pink) !important;
+  z-index: 50 !important;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .social-icon-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    margin-top: 16px !important;
+  }
+  
+  .social-icon {
+    position: static !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    animation: none !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    transform: none !important;
   }
 }
