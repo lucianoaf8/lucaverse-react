@@ -302,8 +302,8 @@ const MainContent = () => {
           {/* Left Column - Text */}
           <div className="flex flex-col justify-center text-center md:text-left relative z-10">
             <h1 className="font-orbitron text-4xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-wider leading-tight init-hidden fade-in-left delay-1">
-              <span className="block text-[color:var(--neon-pink)] text-glow-pink">Welcome</span>
-              <span className="block text-[color:var(--neon-pink)] text-glow-pink text-xl sm:text-3xl lg:text-4xl mb-2">to the</span>
+              <span className="block text-[color:var(--soft-pink)] text-glow-pink">Welcome</span>
+              <span className="block text-[color:var(--soft-pink)] text-glow-pink text-xl sm:text-3xl lg:text-4xl mb-2">to the</span>
               <span id="lucaverse-title" className="block text-[color:var(--neon-blue)] text-glow-blue transition-all duration-300 glitch-active">Lucaverse</span>
             </h1>
             <p className="mt-5 text-lg sm:text-xl text-gray-300 max-w-md mx-auto md:mx-0 init-hidden fade-in-left delay-2">

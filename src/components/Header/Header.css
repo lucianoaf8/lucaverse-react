@@ -60,15 +60,12 @@
   transition: color 0.3s ease;
   font-size: 1.1rem;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-  position: relative;
 }
 
 .nav-menu-link:hover {
   animation: glitch 500ms infinite linear alternate-reverse;
   color: var(--neon-blue);
   text-shadow: 0 0 var(--glow-blur) var(--neon-blue), 0 0 var(--glow-blur-strong) var(--neon-blue);
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
 }
 
 @keyframes glitch {

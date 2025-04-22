@@ -67,7 +67,7 @@ const GlitchAvatar = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0);
             loop();
-          }, 50 + Math.random() * 50); 
+          }, 50 + Math.random() * 80); 
         }, 8000 + Math.random() * 5000); 
       }
 
